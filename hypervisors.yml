@@ -1,0 +1,6 @@
+---
+
+- name: KVM Hypervisor provisioning playbook
+  hosts: hypervisors
+  roles:
+    - { role: common }
