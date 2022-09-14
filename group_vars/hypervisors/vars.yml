@@ -6,3 +6,5 @@ allowed_ports:
   - "25565"
 limited_ports:
   - "22"
+
+mysql_pass: "{{ vault_mysql_pass }}"

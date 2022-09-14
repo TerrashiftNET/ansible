@@ -4,3 +4,4 @@
   hosts: hypervisors
   roles:
     - { role: common }
+    - { role: mariadb_server }
