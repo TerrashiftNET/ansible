@@ -47,16 +47,19 @@
     remote_src: yes
     src: /usr/share/zoneinfo/{{ timezone }}
     dest: /etc/localtime
+    mode: 0644
 
 - name: set timezone to {{ timezone }}
   copy:
     content: "{{ timezone }}\n"
     dest: /etc/timezone
+    mode: 0644
 
 - name: update motd
   copy:
     src: files/common/motd
     dest: /etc/motd
+    mode: 0644
 
 - name: create admin group
   group:
@@ -67,6 +70,7 @@
   copy:
     dest: /etc/sudoers.d/admins
     content: "%admins ALL=(ALL) NOPASSWD: ALL\n"
+    mode: 0644
 
 - name: Create admin users
   user:
@@ -94,6 +98,7 @@
   copy:
     dest: /home/{{ item }}/.bashrc
     src: files/common/bashrc
+    mode: 0644
     owner: "{{ item }}"
     group: "{{ item }}"
     force: yes
@@ -106,6 +111,7 @@
   copy:
     dest: /home/{{ item }}/.vimrc
     src: files/common/vimrc
+    mode: 0644
     owner: "{{ item }}"
     group: "{{ item }}"
     force: yes
@@ -118,6 +124,7 @@
   copy:
     dest: /root/.bashrc
     src: files/common/bashrc
+    mode: 0644
     owner: root
     group: root
     force: yes
@@ -126,6 +133,7 @@
   copy:
     dest: /root/.vimrc
     src: files/common/vimrc
+    mode: 0644
     owner: root
     group: root
     force: yes
@@ -141,7 +149,7 @@
     regexp: "^PasswordAuthentication"
     line: "PasswordAuthentication no"
     state: present
-  notify: Restart SSH 
+  notify: Restart SSH
 
 - name: Disable root SSH access
   lineinfile:
