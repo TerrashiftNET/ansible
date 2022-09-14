@@ -1,0 +1,4 @@
+---
+
+- name: Start hypervisor play
+  import_playbook: hypervisors.yml
