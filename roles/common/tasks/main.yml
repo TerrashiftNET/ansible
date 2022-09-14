@@ -156,3 +156,5 @@
     name: ssh
     state: started
     enabled: yes
+
+- include: firewall.yml
