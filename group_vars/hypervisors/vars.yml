@@ -12,7 +12,23 @@ mysql_pass: "{{ vault_mysql_pass }}"
 host_mode: "host-model"
 
 vms:
-  minecraft:
-    vcpus: 2
+  mc01.terrashift.net:
+    vcpus: 1
     ram_mb: 1024
-    disk_size: 80
+    disk_size: 5
+  mc02.terrashift.net:
+    vcpus: 1
+    ram_mb: 1024
+    disk_size: 5
+  vm01.terrashift.net:
+    vcpus: 1
+    ram_mb: 1024
+    disk_size: 5
+  vm02.terrashift.net:
+    vcpus: 1
+    ram_mb: 1024
+    disk_size: 5
+  vm03.terrashift.net:
+    vcpus: 1
+    ram_mb: 1024
+    disk_size: 5

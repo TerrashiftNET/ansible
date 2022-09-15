@@ -12,6 +12,7 @@
       - libguestfs-tools
       - python3-libvirt
       - python3-lxml
+      - cloud-image-utils
     state: latest
 
 - name: Create the new {{ vm_net }} network

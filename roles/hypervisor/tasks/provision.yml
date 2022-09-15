@@ -16,11 +16,42 @@
       mode: 0660
     register: copy_results
 
+  - name: resize the VM image to {{ item.value.disk_size }}GB
+    command: |
+      qemu-img resize {{ libvirt_pool_dir }}/{{ item.key }}.qcow2 \
+      {{ item.value.disk_size }}G
+    when: copy_results is changed
+
+  - name: resize the {{ item.key }} VM filesystem to {{ item.value.disk_size }}GB
+    block:
+      - name: create backup of the {{ item.key }} image
+        copy:
+          dest: "/tmp/{{ item.key }}-bak.qcow2"
+          src: "{{ libvirt_pool_dir }}/{{ item.key }}.qcow2"
+          force: no
+          remote_src: yes
+          mode: 0600
+
+      - name: resize the {{ item.key }} filesystem
+        command: |
+          virt-resize --expand /dev/sda1 \
+          "/tmp/{{ item.key }}-bak.qcow2" \
+          "{{ libvirt_pool_dir }}/{{ item.key }}.qcow2"
+
+      - name: delete temp image file
+        file:
+          path: "/tmp/{{ item.key }}-bak.qcow2"
+          state: absent
+
+    when: copy_results is changed
+
   - name: Configure the image
     command: |
       virt-customize -a {{ libvirt_pool_dir }}/{{ item.key }}.qcow2 \
       --hostname {{ item.key }} \
       --ssh-inject 'root:file:{{ ansible_key }}.pub' \
+      --run-command 'grub-install --recheck /dev/sda'
+      --run-command 'grub-install --target=x86_64-efi /dev/sda' \
       --run-command 'ssh-keygen -A'
     when: copy_results is changed
 
@@ -29,6 +60,29 @@
       command: define
       xml: "{{ lookup('template', 'vm-config.xml.j2') }}"
   when: "item.key not in existing_vms.list_vms"
+
+- name: Ensure {{ item.key }} VM is started
+  community.libvirt.virt:
+    name: "{{ item.key }}"
+    state: running
+  register: vm_start_results
+  until: "vm_start_results is success"
+  retries: 5
+  delay: 2
+
+- name: sleep for 20 seconds
+  wait_for:
+    delay: 20
+    timeout: 0
+
+- name: Restart {{ item.key }} after initial boot
+  community.libvirt.virt:
+    command: destroy
+    name: "{{ item.key }}"
+  register: vm_stop_results
+  until: "vm_stop_results is success"
+  retries: 5
+  delay: 5
 
 - name: Ensure {{ item.key }} VM is started
   community.libvirt.virt:
