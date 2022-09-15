@@ -1,0 +1,45 @@
+---
+
+- name: Create {{ item.key }} if it does not exist
+  block:
+  - name: Download base image
+    get_url:
+      url: "{{ base_image_url }}"
+      dest: "/tmp/{{ base_image_name }}"
+
+  - name: Copy base image to libvirt directory
+    copy:
+      dest: "{{ libvirt_pool_dir }}/{{ item.key }}.qcow2"
+      src: "/tmp/{{ base_image_name }}"
+      force: no
+      remote_src: yes
+      mode: 0660
+    register: copy_results
+
+  - name: Configure the image
+    command: |
+      virt-customize -a {{ libvirt_pool_dir }}/{{ item.key }}.qcow2 \
+      --hostname {{ item.key }} \
+      --ssh-inject 'root:file:{{ playbook_dir }}/files/ansible.pub'
+    when: copy_results is changed
+
+  - name: Define the {{ item.key }} VM
+    community.libvirt.virt:
+      command: define
+      xml: "{{ lookup('template', 'vm-config.xml.j2') }}"
+  when: "item.key not in existing_vms.list_vms"
+
+- name: Ensure {{ item.key }} VM is started
+  community.libvirt.virt:
+    name: "{{ item.key }}"
+    state: running
+  register: vm_start_results
+  until: "vm_start_results is success"
+  retries: 5
+  delay: 2
+
+- name: Ensure temporary file is deleted
+  file:
+    path: "/tmp/{{ base_image_name }}"
+    state: absent
+  when: cleanup_tmp | bool

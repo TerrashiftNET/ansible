@@ -1,0 +1,41 @@
+---
+
+- name: Install hypervisor packages
+  apt:
+    pkg:
+      - qemu-kvm
+      - libvirt-clients
+      - libvirt-daemon-system
+      - bridge-utils
+      - virtinst
+      - libvirt-daemon
+      - libguestfs-tools
+      - python3-libvirt
+      - python3-lxml
+    state: latest
+
+- name: Create the new {{ vm_net }} network
+  community.libvirt.virt_net:
+    command: define
+    name: "{{ vm_net }}"
+    xml: '{{ lookup("template", "network-config.xml.j2") }}'
+
+- name: Start {{ vm_net }} network
+  community.libvirt.virt_net:
+    command: create
+    name: "{{ vm_net }}"
+
+- name: make {{ vm_net }} network persistent over reboots
+  community.libvirt.virt_net:
+    autostart: yes
+    name: "{{ vm_net }}"
+
+- name: Get VMs list
+  community.libvirt.virt:
+    command: list_vms
+  register: existing_vms
+  changed_when: no
+
+- name: Provision VMs
+  include_tasks: provision.yml
+  with_dict: "{{ vms }}"
