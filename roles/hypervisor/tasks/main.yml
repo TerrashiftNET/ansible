@@ -39,3 +39,9 @@
 - name: Provision VMs
   include_tasks: provision.yml
   with_dict: "{{ vms }}"
+
+- name: Ensure temporary file is deleted
+  file:
+    path: "/tmp/{{ base_image_name }}"
+    state: absent
+  when: cleanup_tmp | bool

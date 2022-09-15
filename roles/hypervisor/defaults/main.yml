@@ -1,6 +1,6 @@
 ---
 
-base_image_name: debian-11-generic-arm64.qcow2
+base_image_name: debian-11-nocloud-amd64.qcow2
 base_image_url: https://cdimage.debian.org/images/cloud/bullseye/latest/{{ base_image_name }}
 libvirt_pool_dir: "/var/lib/libvirt/images"
 vm_net: vms
