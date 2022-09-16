@@ -1,0 +1,6 @@
+---
+
+- name: Minecraft VM provisioning playbook
+  hosts: minecraft_hosts
+  roles:
+    - { role: common }

@@ -1,0 +1,7 @@
+---
+
+allowed_ports:
+  - "80"
+  - "25565"
+limited_ports:
+  - "22"

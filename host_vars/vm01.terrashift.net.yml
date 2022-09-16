@@ -1,0 +1,5 @@
+---
+
+host_groups:
+  - vms
+hostname: "vm01.terrashift.net"

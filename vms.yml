@@ -1,0 +1,6 @@
+---
+
+- name: VM provisioning playbook
+  hosts: vms
+  roles:
+    - { role: common }

@@ -2,3 +2,9 @@
 
 - name: Start hypervisor play
   import_playbook: hypervisors.yml
+
+- name: Start minecraft_hosts play
+  import_playbook: minecraft_hosts.yml
+
+- name: Start vm hosts play
+  import_playbook: vms.yml

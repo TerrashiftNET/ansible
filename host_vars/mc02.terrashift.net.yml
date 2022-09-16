@@ -1,0 +1,5 @@
+---
+
+host_groups:
+  - minecraft_hosts
+hostname: "mc02.terrashift.net"
