@@ -1,8 +1,0 @@
----
-
-plugin: community.libvirt.libvirt
-uri: "qemu:///system"
-inventory_hostname: name
-groups:
-  minecraft_hosts: inventory_hostname.startswith('mc')
-  vms: inventory_hostname.startswith('vm')
