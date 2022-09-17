@@ -5,4 +5,5 @@
   roles:
     - { role: common }
     - { role: hypervisor }
+    - { role: docker-host }
     - { role: mariadb_server }

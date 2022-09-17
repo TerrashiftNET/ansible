@@ -4,3 +4,4 @@
   hosts: minecraft_hosts
   roles:
     - { role: common }
+    - { role: docker-host }
