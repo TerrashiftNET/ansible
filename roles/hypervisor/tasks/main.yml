@@ -41,6 +41,22 @@
   include_tasks: provision.yml
   with_dict: "{{ vms }}"
 
+- name: Ensure VMs are autostarted
+  community.libvirt.virt:
+    name: "{{ item.key }}"
+    autostart: true
+  with_dict: "{{ vms }}"
+
+- name: Get network information after provisioning
+  community.libvirt.virt_net:
+    command: info
+    name: "{{ vm_net }}"
+  register: vm_info
+
+- name: Persist DHCP reservations
+  include_tasks: dhcp.yml
+  with_dict: "{{ vms }}"
+
 - name: Ensure temporary file is deleted
   file:
     path: "/tmp/{{ base_image_name }}"

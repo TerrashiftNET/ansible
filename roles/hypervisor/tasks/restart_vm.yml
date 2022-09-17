@@ -1,0 +1,24 @@
+---
+
+- name: Restart VM
+  block:
+  - name: stop VM
+    community.libvirt.virt:
+      name: "{{ item.key }}"
+      state: shutdown
+    register: vm_net_stop_results
+    until: "vm_net_stop_results is success"
+    retries: 5
+    delay: 5
+
+  - name: sleep for 20 seconds
+    wait_for:
+      delay: 20
+      timeout: 0
+
+  - name: start VM
+    community.libvirt.virt:
+      name: "{{ item.key }}"
+      state: running
+    register: vm_net_start_results
+    until: "vm_net_start_results is success"

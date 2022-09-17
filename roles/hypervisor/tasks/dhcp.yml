@@ -1,0 +1,40 @@
+---
+
+- name: Get node XML definitions
+  community.libvirt.virt:
+    command: get_xml
+    name: "{{ item.key }}"
+  register: vm_xml
+
+- name: create tmp xml file for parsing
+  copy:
+    content: "{{ vm_xml.get_xml }}"
+    dest: "/tmp/{{ item.key }}.xml"
+
+- name: get VM mac address from xml
+  shell:
+    cmd: |
+      egrep "mac address" /tmp/{{ item.key }}.xml \
+      | awk -F\' '{print $2}'
+  register: mac_address
+
+- name: Add static DHCP reservation for {{ item.key }}
+  command: |
+    virsh net-update {{ vm_net }} add ip-dhcp-host \
+    "<host mac='{{ mac_address.stdout }}' name='{{ item.key }}' ip='{{ item.value.ip_addr }}' />" \
+    --live --config
+  when: (mac_address.stdout == inner_item.mac) and (item.value.ip_addr != inner_item.ipaddr)
+  register: mac_update
+  loop: "{{ vm_info.networks.vms.dhcp_leases }}"
+  loop_control:
+    loop_var: inner_item
+    label: "{{ mac_address.stdout }}"
+
+- name: restart {{ item.key }} after DHCP reservation
+  include_tasks: restart_vm.yml
+  when: mac_update is changed
+
+- name: remove tmp xml file
+  file:
+    path: "/tmp/{{ item.key }}.xml"
+    state: absent
