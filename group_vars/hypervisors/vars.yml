@@ -37,3 +37,8 @@ vms:
     ram_mb: 1024
     disk_size: 5
     ip_addr: 10.30.0.6
+
+vhosts:
+  admin.terrashift.net:
+    php_fpm: "php8.1"
+    doc_root: "public/"

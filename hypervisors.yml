@@ -7,3 +7,5 @@
     - { role: hypervisor }
     - { role: docker-host }
     - { role: mariadb_server }
+    - { role: webserver }
+    - { role: pterodactyl_panel }
