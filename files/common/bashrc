@@ -132,7 +132,11 @@ fi
 # $PS1 modifications
 ################################################################################
 
-PS1="\["$SU"\]\u\["$NC"\]@\["$SU"\]\H\["$NC"\]:\["$BBlue"\][\w]\["$NC"\]:\$ "
+# Set the prompt to display the current git branch if available.
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+PS1="\["$SU"\]\u\["$NC"\]@\["$SU"\]\H\["$NC"\]:\["$BBlue"\][\w]\["$NC"\]\[\e[91m\]\$(parse_git_branch)\[\e[37m\]:\$ "
 
 ################################################################################
 # Exports
