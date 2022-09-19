@@ -1,5 +1,5 @@
 server {
-  listen 8080;
+  listen {{ http_port }};
   server_name {{ item.key }};
 
 {% if item.value.doc_root %}

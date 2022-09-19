@@ -42,3 +42,8 @@ vhosts:
   admin.terrashift.net:
     php_fpm: "php8.1"
     doc_root: "public/"
+
+pterodactyl_db: "{{ vault_pterodactyl_db }}"
+pterodactyl_name: "admin.terrashift.net"
+pterodactyl_mail: "{{ vault_pterodactyl_mail }}"
+pterodactyl_user: "{{ vault_pterodactyl_user }}"

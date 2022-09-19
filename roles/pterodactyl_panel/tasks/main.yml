@@ -27,3 +27,26 @@
       - php8.1-zip
       - composer
     state: present
+
+- name: create mariadb database
+  mysql_db:
+    name: "{{ pterodactyl_db.database}}"
+    state: present
+
+- name: create pterodactyl db user
+  mysql_user:
+    login_host: 127.0.0.1
+    login_port: 3306
+    name: "{{pterodactyl_db.username }}"
+    password: "{{ pterodactyl_db.password }}"
+    priv: "{{ pterodactyl_db.database }}.*:ALL"
+    state: present
+
+- name: Check if we are doing the initial install
+  find:
+    paths: "/home/www/{{ pterodactyl_name }}/public/"
+  register: initial_setup
+
+- name: Initial pterodactyl setup
+  include_tasks: install.yml
+  when: initial_setup.matched == 0
