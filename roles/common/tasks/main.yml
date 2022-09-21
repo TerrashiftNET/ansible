@@ -56,7 +56,7 @@
 - name: update motd
   copy:
     src: files/common/update-motd/*
-    dest: /etc/update-motd/*
+    dest: /etc/update-motd/
     mode: 0744
     owner: root
     group: root
