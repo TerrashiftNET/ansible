@@ -39,14 +39,14 @@
     chdir: "/home/www/{{ pterodactyl_name }}"
 
 - name: Create admin user
-  command: >
-    argv: php artisan p:user:make \
-    --email "{{ pterodactyl_user.email }}" \
-    --username "{{ pterodactyl_user.username |quote }}" \
-    --name-first "{{ pterodactyl_user.first_name | quote }}" \
-    --name-last "{{ pterodactyl_user.last_name | quote }}" \
-    --pasword "{{ pterodactyl_user.password | quote }}" \
-    --admin=yes
+  shell:
+    cmd: >
+      php artisan p:user:make --email "{{ pterodactyl_user.mail }}"
+      --username "{{ pterodactyl_user.username |quote }}"
+      --name-first "{{ pterodactyl_user.first_name | quote }}"
+      --name-last "{{ pterodactyl_user.last_name | quote }}"
+      --password "{{ pterodactyl_user.password | quote }}"
+      --admin=1
     chdir: "/home/www/{{ pterodactyl_name }}"
 
 - name: adjust permissions

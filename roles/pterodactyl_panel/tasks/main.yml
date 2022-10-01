@@ -25,7 +25,9 @@
       - php8.1-fpm
       - php8.1-curl
       - php8.1-zip
+      - php8.1-redis
       - composer
+      - redis-server
     state: present
 
 - name: create mariadb database
