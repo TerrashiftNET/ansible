@@ -4,11 +4,13 @@
   template:
     src: vhost.conf.j2
     dest: "/etc/nginx/sites-available/{{ item.key }}.conf"
+    mode: 0644
 
 - name: Setup {{ item.key }} document root
   file:
     path: "/home/www/{{ item.key }}/{{ item.value.doc_root | default(omit) }}"
     state: directory
+    mode: 0755
 
 - name: Enable {{ item.key }} vhost
   file:

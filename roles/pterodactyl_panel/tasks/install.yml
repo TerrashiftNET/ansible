@@ -20,6 +20,7 @@
   template:
     src: env.j2
     dest: "/home/www/{{ pterodactyl_name }}/.env"
+    mode: 0644
 
 - name: Install panel dependencies
   shell:

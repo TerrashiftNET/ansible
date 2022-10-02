@@ -4,4 +4,4 @@
   hosts: vms
   roles:
     - { role: common }
-    - { role: docker-host }
+    - { role: docker_host }
