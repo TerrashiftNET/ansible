@@ -9,3 +9,4 @@
     - { role: mariadb_server }
     - { role: webserver }
     - { role: pterodactyl_panel }
+    - { role: haproxy }

@@ -57,6 +57,9 @@
   include_tasks: dhcp.yml
   with_dict: "{{ vms }}"
 
+- name: Refresh inventory
+  meta: refresh_inventory
+
 - name: Ensure temporary file is deleted
   file:
     path: "/tmp/{{ base_image_name }}"
