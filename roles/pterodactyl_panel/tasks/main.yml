@@ -25,19 +25,21 @@
       - php8.1-fpm
       - php8.1-curl
       - php8.1-zip
+      - php8.1-redis
       - composer
+      - redis-server
     state: present
 
 - name: create mariadb database
   mysql_db:
-    name: "{{ pterodactyl_db.database}}"
+    name: "{{ pterodactyl_db.database }}"
     state: present
 
 - name: create pterodactyl db user
   mysql_user:
     login_host: 127.0.0.1
     login_port: 3306
-    name: "{{pterodactyl_db.username }}"
+    name: "{{ pterodactyl_db.username }}"
     password: "{{ pterodactyl_db.password }}"
     priv: "{{ pterodactyl_db.database }}.*:ALL"
     state: present

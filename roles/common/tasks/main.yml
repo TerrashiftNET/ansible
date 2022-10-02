@@ -55,11 +55,13 @@
 
 - name: update motd
   copy:
-    src: files/common/update-motd/*
-    dest: /etc/update-motd/
+    src: "{{ item }}"
+    dest: /etc/update-motd.d/
     mode: 0744
     owner: root
     group: root
+  with_fileglob:
+    - files/common/update-motd/*
 
 - name: create admin group
   group:

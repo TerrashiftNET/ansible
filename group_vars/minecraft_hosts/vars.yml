@@ -3,5 +3,6 @@
 allowed_ports:
   - "80"
   - "25565"
+  - "8080"
 limited_ports:
   - "22"

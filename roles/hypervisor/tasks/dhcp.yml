@@ -10,6 +10,7 @@
   copy:
     content: "{{ vm_xml.get_xml }}"
     dest: "/tmp/{{ item.key }}.xml"
+    mode: 0644
 
 - name: get VM mac address from xml
   shell:
