@@ -3,8 +3,14 @@
 ansible_python_interpreter: "/usr/bin/python3"
 timezone: "UTC"
 
+allowed_ports:
+  - "80"
+  - "443"
+  - "25565"
+limited_ports:
+  - "22"
 # list of admin users:
 admins:
   robo:
     username: "robo"
-    key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC1qbkiSDrsFMoka/OScoFySsP+YzDYkATMsITL4zg6pR/lmDsRyVfWF7dNeZEXKOHU2+AtBy3FP70WqBl1NlApRZa28fFzfkVXmrXXTAi0JRnjiV3BgCvq4JFs+aWrj2WccjV8UXEIVywDqi3jrzd+d9oQEStfx6ClboByjpc+gPuu8qnDzXpi7Q5GfJnwN8gK9wn3vj2WgJDnniBG58g8yiXRacMgOya8ZhbseCow0wmjHMg4MYot8iAmuwkGqiqCMg5AUgmKcEwFrphD4EUfl8iQZYvxsfR46ccVL6IG/To/oCYxVFSxKGH/AdaKsoMXmKDBE9N3Mxuqso8ZsDuUdqnzWpOVRbZo5GDyGinb0j6Muikyw8JYfZ6TbVhzEX3lxy1Jkb6kEmqF0VMLGHWXQiIn/tHEjhj3/2EMIZcEtl1OZ2TcAvR6sYCFgRFQWyD2J17gkUwuxe7V0ZOstLOXJ51aoL6JJCfWKi1vecpq9Ye0N8G2mPSYkAhQRlHGKj7BiKcWdVBoiZRh1ylhoP9ecc5UPMpIIgq9oAzZQMa0zVOzvQWlI96Q0vXpn5ogQHHkD95aquDaF79zG4VPyd/slUmdSc+CVq0WXjh25X1PqZM45/XyO9noDerKE6BdlsE3I2NZo9FJ4rGnYBF1lGYTrpHyugZjaTHRQrgX63DYow== robo@robo.home.rhawks.net"
+    key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDT7gLDr9P1oScCzZZJrw0BtTNe9+jRxjrt8WlDxUWY8HFTSQZ91yx6u1twvPcuvOUCchtcXKO+3QMEZg18KS17i5kEmNvtXu29w2jMYrK1dVwiYrBRKjBXG/fjmcmIg//6+Madp0f8IcStp+XDsGBFoc4RTcpBHF8k1BHDi0BDhBghfNDqT5NyoPpTb7B9iNq2MvoAgduwNtiL22hlYCawjB1OS6i3qgZQBA6xx8TierzBmxt7Z9ZtOCFUlmhVnOXC+uto9UVMkXuCzNfBo/Ca/SDqYOHU1NQPP9zgub5Zhzg3LcEGtqN9mPUgwTxiZGln5AdZtCjB0kmGkOCa+EH1ru8kDxPt18F+O4r62aez9tmIEtzQxQ0b2fRA1L1x2Wr8mAUX1I9udX89Tbt2tp1qui/ax69d9e9INRcbsomYpFTsdmWh/KlQMcbzUHgQyilpxRbQoRznwvxNVOUo+tFOmNDmIh8UWBsDUQ6hjVCNeKdGgAgvQBaeYVgpw9F5m2k= robo@robo.home.rhawks.net"

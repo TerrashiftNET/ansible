@@ -37,3 +37,122 @@
   apt:
     name: "*"
     state: latest
+
+- name: set localtime to {{ timezone }}
+  copy:
+    remote_src: true
+    src: /usr/share/zoneinfo/{{ timezone }}
+    dest: /etc/localtime
+    mode: 0644
+
+- name: set timezone to {{ timezone }}
+  community.general.timezone:
+    name: "{{ timezone }}"
+
+- name: update motd
+  copy:
+    src: "{{ item }}"
+    dest: /etc/update-motd.d/
+    mode: 0744
+    owner: root
+    group: root
+  with_fileglob:
+    - files/common/update-motd/*
+
+- name: create admin group
+  group:
+    name: admins
+    state: present
+
+- name: allow admin passwordless sudo
+  copy:
+    dest: /etc/sudoers.d/admins
+    content: "%admins ALL=(ALL) NOPASSWD: ALL\n"
+    mode: 0644
+
+- name: Create admin users
+  user:
+    name: "{{ item }}"
+    state: present
+    shell: "/bin/bash"
+    groups: admins
+    append: true
+  with_items:
+    - "{{ admins.robo.username }}"
+
+- name: add public SSH keys
+  authorized_key:
+    user: "{{ item.name }}"
+    state: present
+    key: "{{ item.key }}"
+  with_items:
+    - {name: "{{ admins.robo.username }}", key: "{{ admins.robo.key }}"}
+
+- name: add bashrc configurations
+  copy:
+    dest: /home/{{ item }}/.bashrc
+    src: files/common/bashrc
+    mode: 0644
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    force: true
+  with_items:
+    - "{{ admins.robo.username }}"
+
+- name: add vimrc configurations
+  copy:
+    dest: /home/{{ item }}/.vimrc
+    src: files/common/vimrc
+    mode: 0644
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    force: true
+  with_items:
+    - "{{ admins.robo.username }}"
+
+- name: add root bashrc configurations
+  copy:
+    dest: /root/.bashrc
+    src: files/common/bashrc
+    mode: 0644
+    owner: root
+    group: root
+    force: true
+
+- name: add root vimrc configurations
+  copy:
+    dest: /root/.vimrc
+    src: files/common/vimrc
+    mode: 0644
+    owner: root
+    group: root
+    force: true
+
+- name: Install SSH server.
+  apt:
+    pkg:
+      - openssh-server
+
+- name: Disable password auth.
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^PasswordAuthentication"
+    line: "PasswordAuthentication no"
+    state: present
+  notify: Restart SSH
+
+- name: Enable root SSH access
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^PermitRootLogin"
+    line: "PermitRootLogin yes"
+    state: present
+  notify: Restart SSH
+
+- name: Ensure SSH is enabled
+  service:
+    name: ssh
+    state: started
+    enabled: true
+
+- include_tasks: firewall.yml
