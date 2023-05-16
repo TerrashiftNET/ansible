@@ -1,0 +1,21 @@
+---
+
+- name: import docker apt key
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+
+- name: enable docker repo
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable"
+    filename: docker
+    state: present
+
+- name: install docker
+  apt:
+    update_cache: true
+    pkg:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    state: present
