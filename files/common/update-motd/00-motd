@@ -51,4 +51,3 @@ printf "${COLOR_INFO}Running Processes :${COLOR_VALUE} %s\n" "${running_processe
 printf "${COLOR_DEFAULT}"
 
 printf "\n"
-uname -snrvm

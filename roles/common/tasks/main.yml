@@ -59,6 +59,11 @@
   with_fileglob:
     - files/common/update-motd/*
 
+- name: remove default motd
+  file:
+    path: /etc/motd
+    state: absent
+
 - name: create admin group
   group:
     name: admins
