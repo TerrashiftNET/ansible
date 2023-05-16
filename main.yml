@@ -1,0 +1,6 @@
+---
+
+- name: MC provisioning playbook
+  hosts: all
+  roles:
+    - {role: common}

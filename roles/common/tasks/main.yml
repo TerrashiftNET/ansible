@@ -1,0 +1,39 @@
+---
+
+- name: Update repositories.
+  apt: update_cache=yes cache_valid_time={{ aptcachetime }}
+
+- name: Install common packages.
+  apt:
+    pkg:
+      - sudo
+      - curl
+      - wget
+      - atop
+      - net-tools
+      - vim
+      - git
+      - rsync
+      - nfs-common
+      - unzip
+      - whois
+      - zip
+      - pwgen
+      - pv
+      - openssl
+      - nmap
+      - screen
+      - tmux
+      - unrar-free
+      - yamllint
+      - pylint
+      - shellcheck
+      - jq
+      - smartmontools
+      - python3-virtualenv
+    state: latest
+
+- name: Upgrade installed pkgs.
+  apt:
+    name: "*"
+    state: latest

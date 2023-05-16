@@ -1,0 +1,31 @@
+---
+
+name: "Ansible"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  ansible:
+    name: "Ansible"
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ssh-key: ${{ secrets.REPO_KEY }}
+
+      - name: Install hcloud library
+        id: hcloud-install
+        run: apt-get install python3-hcloud
+
+      - name: Run ansible
+        uses: dawidd6/action-ansible-playbook@v2
+        with:
+          playbook: main.yml
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          vault_password: ${{ secrets.ANSIBLE_VAULT_PASS }}
