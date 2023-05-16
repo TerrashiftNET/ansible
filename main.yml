@@ -2,5 +2,6 @@
 
 - name: MC provisioning playbook
   hosts: all
+  become: true
   roles:
     - {role: common}
