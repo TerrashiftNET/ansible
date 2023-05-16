@@ -21,7 +21,7 @@ jobs:
 
       - name: Install hcloud library
         id: hcloud-install
-        run: sudo apt-get install python3-hcloud
+        run: pip3 install hcloud
 
       - name: Run ansible
         uses: dawidd6/action-ansible-playbook@v2
