@@ -38,6 +38,10 @@
     name: "*"
     state: latest
 
+- name: Update hostname to {{ hostname }}
+  hostname:
+    name: "{{ inventory_hostname }}"
+
 - name: set localtime to {{ timezone }}
   copy:
     remote_src: true
