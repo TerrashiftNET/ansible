@@ -1,3 +1,0 @@
----
-
-mysql_pass: "{{ vault_mysql_pass }}"

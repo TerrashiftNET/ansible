@@ -9,7 +9,7 @@
 - name: change root credentials
   mysql_user:
     login_unix_socket: /var/run/mysqld/mysqld.sock
-    check_implicit_admin: yes
+    check_implicit_admin: true
     name: root
     host: "{{ item }}"
     password: "{{ mysql_pass }}"
