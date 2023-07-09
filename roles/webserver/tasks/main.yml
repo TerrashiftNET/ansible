@@ -1,0 +1,30 @@
+---
+
+- name: ensure nginx is installed
+  apt:
+    pkg: nginx
+    state: latest
+
+- name: start nginx
+  service:
+    name: nginx
+    state: started
+
+- name: remove default nginx vhost
+  file:
+    path: "/etc/nginx/sites-enabled/default"
+    state: absent
+  notify: Restart nginx
+
+- name: create webroot directory
+  file:
+    path: /home/www/
+    state: directory
+    mode: '0755'
+
+- name: Setup certbot
+  include_tasks: certbot.yml
+
+- name: Deploy sites
+  include_tasks: vhost.yml
+  with_dict: "{{ vhosts }}"

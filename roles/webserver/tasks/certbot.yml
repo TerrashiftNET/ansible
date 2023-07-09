@@ -1,0 +1,28 @@
+---
+
+- name: ensure certbot is installed
+  apt:
+    pkg:
+      - certbot
+      - python3-certbot-dns-cloudflare
+    state: latest
+
+- name: add cloudflare credentials for wildcard certs
+  copy:
+    dest: /etc/letsencrypt/cf.ini
+    src: files/certbot/cf.ini
+    mode: 0400
+    owner: "root"
+    group: "root"
+    force: true
+
+- name: generate wildcard certificate
+  command: >
+    certbot certonly --dns-cloudflare
+    --dns-cloudflare-credentials /etc/letsencrypt/cf.ini
+    --preferred-challenges dns-01
+    --agree-tos
+    -d terrashift.net,*.terrashift.net
+    -m {{ le_email }}
+  args:
+    creates: /etc/letsencrypt/live/terrashift.net

@@ -7,3 +7,4 @@
     - {role: common}
     - {role: docker_host}
     - {role: mariadb_server}
+    - {role: webserver}
