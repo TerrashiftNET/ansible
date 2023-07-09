@@ -22,6 +22,7 @@
     --dns-cloudflare-credentials /etc/letsencrypt/cf.ini
     --preferred-challenges dns-01
     --agree-tos
+    --dns-cloudflare-propagation-seconds 30
     -d terrashift.net,*.terrashift.net
     -m {{ le_email }}
   args:
