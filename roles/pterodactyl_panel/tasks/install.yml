@@ -1,0 +1,72 @@
+---
+
+- name: Download panel data
+  get_url:
+    url: "https://github.com/pterodactyl/panel/releases/latest/download/panel.tar.gz"
+    dest: "/home/www/{{ pterodactyl_name }}/panel.tar.gz"
+
+- name: Extract panel archive
+  unarchive:
+    src: "/home/www/{{ pterodactyl_name }}/panel.tar.gz"
+    remote_src: true
+    dest: "/home/www/{{ pterodactyl_name }}"
+
+- name: Remove panel archive
+  file:
+    path: "/home/www/{{ pterodactyl_name }}/panel.tar.gz"
+    state: absent
+
+- name: create env file
+  template:
+    src: env.j2
+    dest: "/home/www/{{ pterodactyl_name }}/.env"
+    mode: 0644
+
+- name: Install panel dependencies
+  shell:
+    cmd: composer install --no-dev --optimize-autoloader
+    chdir: "/home/www/{{ pterodactyl_name }}"
+  environment:
+    COMPOSER_ALLOW_SUPERUSER: 1
+
+- name: Setup database tables
+  shell:
+    cmd: php artisan migrate --seed --force
+    chdir: "/home/www/{{ pterodactyl_name }}"
+
+- name: Create admin user
+  shell:
+    cmd: >
+      php artisan p:user:make --email "{{ pterodactyl_user.mail }}"
+      --username "{{ pterodactyl_user.username |quote }}"
+      --name-first "{{ pterodactyl_user.first_name | quote }}"
+      --name-last "{{ pterodactyl_user.last_name | quote }}"
+      --password "{{ pterodactyl_user.password | quote }}"
+      --admin=1
+    chdir: "/home/www/{{ pterodactyl_name }}"
+
+- name: adjust permissions
+  file:
+    path: "/home/www/{{ pterodactyl_name }}/"
+    state: directory
+    owner: "www-data"
+    group: "www-data"
+    recurse: true
+
+- name: add queue worker cron
+  cron:
+    name: "Pterodactyl queue worker"
+    job: "php /home/www/{{ pterodactyl_name }}/artisan schedule:run >> /dev/null 2>&1"
+    state: present
+
+- name: create pterodactyl service
+  template:
+    src: pterodactyl.service.j2
+    dest: "/etc/systemd/system/pterodactyl.service"
+
+- name: start pterodactyl service
+  systemd:
+    state: started
+    enabled: true
+    name: pterodactyl
+    daemon_reload: true

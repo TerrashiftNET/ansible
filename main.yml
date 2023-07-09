@@ -8,3 +8,4 @@
     - {role: docker_host}
     - {role: mariadb_server}
     - {role: webserver}
+    - {role: pterodactyl_panel}
