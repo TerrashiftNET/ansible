@@ -153,4 +153,9 @@
     state: started
     enabled: true
 
+- name: Create minecraft directory
+  file:
+    path: /home/minecraft/
+    state: directory
+
 - include_tasks: firewall.yml

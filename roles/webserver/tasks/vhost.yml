@@ -5,6 +5,8 @@
     src: vhost.conf.j2
     dest: "/etc/nginx/sites-available/{{ item.key }}.conf"
     mode: 0644
+  notify:
+    - Restart nginx
 
 - name: Setup {{ item.key }} document root
   file:

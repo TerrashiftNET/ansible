@@ -18,4 +18,10 @@
       - docker-ce
       - docker-ce-cli
       - containerd.io
+      - docker-compose
     state: present
+
+- name: create docker-compose directory
+  file:
+    path: /srv/container/
+    state: directory

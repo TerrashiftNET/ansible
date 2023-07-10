@@ -1,0 +1,37 @@
+---
+
+- name: create limesurvey directory
+  file:
+    path: /srv/container/limesurvey/
+    state: directory
+
+- name: copy Limesurvey compose file
+  copy:
+    src: "files/limesurvey/docker-compose.yml"
+    dest: /srv/container/limesurvey/docker-compose.yml
+    mode: 0644
+    owner: root
+    group: root
+
+- name: copy Limesurvey env file
+  copy:
+    src: "files/limesurvey/env"
+    dest: /srv/container/limesurvey/.env
+    mode: 0400
+    owner: root
+    group: root
+
+- name: setup Limesurvey service
+  copy:
+    src: "files/limesurvey/limesurvey.service"
+    dest: /etc/systemd/system/limesurvey.service
+    mode: 0644
+    owner: root
+    group: root
+
+- name: start Limesurvey service
+  systemd:
+    state: started
+    enabled: true
+    name: limesurvey
+    daemon_reload: true

@@ -2,3 +2,5 @@
 
 vhosts:
   apply.terrashift.net:
+    proxy:
+      port: 8082
