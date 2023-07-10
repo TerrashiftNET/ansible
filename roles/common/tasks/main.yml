@@ -42,17 +42,6 @@
   hostname:
     name: "{{ inventory_hostname }}"
 
-- name: set localtime to {{ timezone }}
-  copy:
-    remote_src: true
-    src: /usr/share/zoneinfo/{{ timezone }}
-    dest: /etc/localtime
-    mode: 0644
-
-- name: set timezone to {{ timezone }}
-  community.general.timezone:
-    name: "{{ timezone }}"
-
 - name: update motd
   copy:
     src: "{{ item }}"

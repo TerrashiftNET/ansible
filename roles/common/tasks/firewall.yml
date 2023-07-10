@@ -25,6 +25,11 @@
   with_items:
     - "{{ limited_ports }}"
 
+- name: allow all private traffic
+  ufw:
+    rule: allow
+    src: 10.2.0.0/24
+
 - name: enable UFW and disable all other ports
   ufw:
     state: enabled
