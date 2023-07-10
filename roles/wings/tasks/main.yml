@@ -1,0 +1,10 @@
+---
+
+- name: Check if wings already exists on the host
+  stat:
+    path: "/usr/local/bin/wings"
+  register: wings
+
+- name: Run wings installation if needed
+  include_tasks: install.yml
+  when: not wings.stat.exists

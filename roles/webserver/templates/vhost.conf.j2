@@ -12,7 +12,7 @@ server {
   ssl_certificate /etc/letsencrypt/live/terrashift.net/fullchain.pem;
   ssl_certificate_key /etc/letsencrypt/live/terrashift.net/privkey.pem;
 
-{% if item.value.doc_root %}
+{% if item.value.doc_root is defined %}
   root /home/www/{{ item.key }}/{{ item.value.doc_root }};
 {% else %}
   root /home/www/{{ item.key }}/;
@@ -38,7 +38,7 @@ server {
       try_files $uri $uri/ /index.php?$query_string;
   }
 
-{% if item.value.php_fpm %}
+{% if item.value.php_fpm is defined %}
   location ~ \.php$ {
       fastcgi_split_path_info ^(.+\.php)(/.+)$;
       fastcgi_pass unix:/run/php/{{ item.value.php_fpm }}-fpm.sock;

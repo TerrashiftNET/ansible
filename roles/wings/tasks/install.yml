@@ -1,0 +1,25 @@
+---
+
+- name: Create wings configuration directory
+  file:
+    path: "/etc/pterodactyl"
+    state: directory
+    mode: 0755
+
+- name: Download wings
+  get_url:
+    url: "{{ wings_url }}"
+    dest: "/usr/local/bin/wings"
+    mode: 0755
+
+- name: create wings service
+  template:
+    src: "files/wings/wings.service"
+    dest: "/etc/systemd/system/wings.service"
+
+- name: start wings service
+  systemd:
+    state: started
+    enabled: true
+    name: wings
+    daemon_reload: true

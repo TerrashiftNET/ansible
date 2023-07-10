@@ -8,7 +8,7 @@
 
 - name: Setup {{ item.key }} document root
   file:
-    path: "/home/www/{{ item.key }}/{{ item.value.doc_root | default(omit) }}"
+    path: "/home/www/{{ item.key }}/{{ item.value.doc_root if item.value.doc_root is defined else '' }}"
     state: directory
     mode: 0755
 

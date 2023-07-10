@@ -1,0 +1,9 @@
+---
+
+- name: Secondary node provisioning playbook
+  hosts: node_role_secondary
+  become: true
+
+  roles:
+    - {role: webserver, tags: web}
+    - {role: wings, tags: pterodactyl}

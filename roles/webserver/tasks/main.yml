@@ -22,9 +22,6 @@
     state: directory
     mode: '0755'
 
-- name: Setup certbot
-  include_tasks: certbot.yml
-
 - name: Deploy sites
   include_tasks: vhost.yml
   with_dict: "{{ vhosts }}"

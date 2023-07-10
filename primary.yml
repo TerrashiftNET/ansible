@@ -1,0 +1,12 @@
+---
+
+- name: Primary node provisioning playbook
+  hosts: node_role_primary
+  become: true
+
+  roles:
+    - {role: mariadb_server, tags: primary, db}
+    - {role: certbot, tags: web}
+    - {role: webserver, tags: web}
+    - {role: pterodactyl_panel, tags: primary, pterodactyl}
+    - {role: wings, tags: pterodactyl}

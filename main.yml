@@ -4,8 +4,11 @@
   hosts: all
   become: true
   roles:
-    - {role: common}
-    - {role: docker_host}
-    - {role: mariadb_server}
-    - {role: webserver}
-    - {role: pterodactyl_panel}
+    - {role: common, tags: common}
+    - {role: docker_host, tags: docker}
+
+- name: Include primary playbook
+  import_playbook: primary.yml
+
+- name: Include secondary playbook
+  import_playbook: secondary.yml
