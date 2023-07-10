@@ -1,0 +1,6 @@
+---
+
+- name: Install node-exporter
+  apt:
+    pkg:
+      - prometheus-node-exporter

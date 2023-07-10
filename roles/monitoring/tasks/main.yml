@@ -1,0 +1,58 @@
+---
+
+- name: Install prometheus
+  apt:
+    pkg:
+      - prometheus
+
+- name: create config file
+  template:
+    src: prometheus.yml.j2
+    dest: "/etc/prometheus/prometheus.yml"
+    mode: 0644
+  notify: Restart prometheus
+
+
+- name: create mariadb database
+  mysql_db:
+    name: "{{ grafana_db.name }}"
+    state: present
+
+- name: create grafana db user
+  mysql_user:
+    login_host: 127.0.0.1
+    login_port: 3306
+    name: "{{ grafana_db.user }}"
+    password: "{{ grafana_db.password }}"
+    priv: "{{ grafana_db.name }}.*:ALL"
+    state: present
+
+- name: add grafana gpg key
+  apt_key:
+    url: https://apt.grafana.com/gpg.key
+    state: present
+
+- name: add grafana repo
+  apt_repository:
+    repo: deb https://apt.grafana.com stable main
+    state: present
+    filename: grafana
+
+- name: Install grafana
+  apt:
+    name: grafana
+    state: present
+    update_cache: true
+
+- name: create grafana config file
+  template:
+    src: grafana.ini.j2
+    dest: "/etc/grafana/grafana.ini"
+    mode: 0440
+  notify: Restart grafana
+
+- name: Enable and start grafana
+  service:
+    name: grafana-server
+    enabled: true
+    state: started

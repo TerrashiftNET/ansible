@@ -1,0 +1,68 @@
+app_mode = production
+instance_name = grafana.terrashift.net
+
+
+[paths]
+data = /var/lib/grafana
+temp_data_lifetime = 24h
+logs = /var/log/grafana
+plugins = /var/lib/grafana/plugins
+provisioning = conf/provisioning
+
+[server]
+protocol = http
+http_port = 3000
+domain = grafana.terrashift.net
+
+[database]
+type = mysql
+host = {{ grafana_db.host }}
+name = {{ grafana_db.name }}
+user = {{ grafana_db.user }}
+password = {{ grafana_db.password }}
+
+[remote_cache]
+type = redis
+connstr = addr=127.0.0.1:6379
+
+[dataproxy]
+
+[analytics]
+
+[security]
+
+admin_user = {{ grafana_user.name }}
+admin_password = {{ grafana_user.password }}
+admin_email = {{ grafana_user.email }}
+
+cookie_secure = true
+
+[snapshots]
+
+[dashboards]
+
+[users]
+allow_sign_up = false
+allow_org_create = false
+auto_assign_org_role = Editor
+
+[secretscan]
+
+[service_accounts]
+
+[auth]
+
+[auth.anonymous]
+
+[smtp]
+
+[log]
+
+[log.syslog]
+
+[unified_alerting]
+
+[annotations]
+
+[date_formats]
+default_timezone = UTC

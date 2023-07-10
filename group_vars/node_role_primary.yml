@@ -4,3 +4,6 @@ vhosts:
   admin.terrashift.net:
     php_fpm: "php8.1"
     doc_root: "public/"
+  grafana.terrashift.net:
+    proxy:
+      port: 3000
