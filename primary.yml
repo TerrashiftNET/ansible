@@ -6,9 +6,8 @@
 
   roles:
     - {role: mariadb_server, tags: [primary, db]}
-    - {role: certbot, tags: [web]}
+    - {role: certbot, tags: [web, certbot]}
     - {role: webserver, tags: [web]}
     - {role: pterodactyl_panel, tags: [primary, pterodactyl]}
     - {role: wings, tags: [pterodactyl]}
-    - {role: lsyncd, tags: [primary]}
     - {role: monitoring, tags: [primary, monitoring]}

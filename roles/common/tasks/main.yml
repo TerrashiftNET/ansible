@@ -30,6 +30,8 @@
       - shellcheck
       - jq
       - smartmontools
+      - gpg
+      - gpg-agent
       - python3-virtualenv
     state: latest
 
@@ -77,6 +79,7 @@
     append: true
   with_items:
     - "{{ admins.robo.username }}"
+    - "{{ admins.tyler.username }}"
 
 - name: add public SSH keys
   authorized_key:
@@ -85,6 +88,7 @@
     key: "{{ item.key }}"
   with_items:
     - {name: "{{ admins.robo.username }}", key: "{{ admins.robo.key }}"}
+    - {name: "{{ admins.tyler.username }}", key: "{{ admins.tyler.key }}"}
 
 - name: add bashrc configurations
   copy:
@@ -96,6 +100,7 @@
     force: true
   with_items:
     - "{{ admins.robo.username }}"
+    - "{{ admins.tyler.username }}"
 
 - name: add vimrc configurations
   copy:
@@ -107,6 +112,7 @@
     force: true
   with_items:
     - "{{ admins.robo.username }}"
+    - "{{ admins.tyler.username }}"
 
 - name: add root bashrc configurations
   copy:
@@ -131,20 +137,14 @@
     pkg:
       - openssh-server
 
-- name: Disable password auth.
-  lineinfile:
+- name: add ssh config
+  copy:
     dest: /etc/ssh/sshd_config
-    regexp: "^PasswordAuthentication"
-    line: "PasswordAuthentication no"
-    state: present
-  notify: Restart SSH
-
-- name: Disable root SSH access
-  lineinfile:
-    dest: /etc/ssh/sshd_config
-    regexp: "^PermitRootLogin"
-    line: "PermitRootLogin no"
-    state: present
+    src: files/common/sshd_config
+    owner: root
+    group: root
+    mode: 06444
+    force: true
   notify: Restart SSH
 
 - name: Ensure SSH is enabled
@@ -157,6 +157,15 @@
   file:
     path: /home/minecraft/
     state: directory
+
+- name: create private host entries
+  lineinfile:
+    dest: /etc/hosts
+    regexp: '.*{{ item }}$'
+    line: "{{ hostvars[item]['ansible_ens10'].ipv4.address }} {{ item }}"
+    state: present
+  when: hostvars[item].ansible_host is defined
+  with_items: "{{ groups.all }}"
 
 - include_tasks: firewall.yml
 - include_tasks: prometheus.yml
