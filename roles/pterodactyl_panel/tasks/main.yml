@@ -45,7 +45,7 @@
 
 - name: Check if we are doing the initial install
   find:
-    paths: "/home/www/{{ pterodactyl_name }}/.env"
+    paths: "/home/www/{{ pterodactyl_name }}/public/"
   register: initial_setup
 
 - name: Initial pterodactyl setup
