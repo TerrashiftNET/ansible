@@ -5,5 +5,5 @@
   become: true
 
   roles:
-    - {role: webserver, tags: web}
-    - {role: wings, tags: pterodactyl}
+    - {role: webserver, tags: [ web, ]}
+    - {role: wings, tags: [ pterodactyl, ]}
