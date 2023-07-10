@@ -139,11 +139,11 @@
     state: present
   notify: Restart SSH
 
-- name: Enable root SSH access
+- name: Disable root SSH access
   lineinfile:
     dest: /etc/ssh/sshd_config
     regexp: "^PermitRootLogin"
-    line: "PermitRootLogin yes"
+    line: "PermitRootLogin no"
     state: present
   notify: Restart SSH
 
