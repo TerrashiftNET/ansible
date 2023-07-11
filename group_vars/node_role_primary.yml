@@ -7,3 +7,6 @@ vhosts:
   grafana.terrashift.net:
     proxy:
       port: 3000
+  map.terrashift.net:
+    proxy:
+      port: 8100
