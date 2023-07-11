@@ -21,8 +21,6 @@ scrape_configs:
 
   - job_name: terrashift
     static_configs:
-      -targets: [
-{% for host in groups['node_role_primary'] %}
-        '{{ host }}:25585',
-{% endfor %}
+      - targets: [
+        'terrashift.net:25585',
       ]

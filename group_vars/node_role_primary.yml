@@ -10,3 +10,4 @@ vhosts:
   map.terrashift.net:
     proxy:
       port: 8100
+      ip: "{{ ansible_ssh_host }}"
