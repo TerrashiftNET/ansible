@@ -6,3 +6,15 @@
       - nodejs
       - npm
     state: present
+
+- name: create node service
+  template:
+    src: "files/recruiting/node-apply.service"
+    dest: "/etc/systemd/system/node-apply.service"
+
+- name: start node service
+  systemd:
+    state: started
+    enabled: true
+    name: node-apply
+    daemon_reload: true
