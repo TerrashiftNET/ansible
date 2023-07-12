@@ -12,3 +12,4 @@
     - {role: wings, tags: [pterodactyl]}
     - {role: monitoring, tags: [primary, monitoring]}
     - {role: automation, tags: [primary, automation]}
+    - {role: stats, tags: [primary, stats]}

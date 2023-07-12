@@ -1,0 +1,14 @@
+---
+
+- name: install java
+  apt:
+    pkg:
+      - openjdk-17-jre
+    state: installed
+
+- name: add stat update cron
+  cron:
+    name: "state update cron"
+    job: "java -jar /home/www/stats.terrashift.net/MinecraftStatsCLI.jar /home/www/stats.terrashift.net/config.json"
+    minute: "*/5"
+    state: present
