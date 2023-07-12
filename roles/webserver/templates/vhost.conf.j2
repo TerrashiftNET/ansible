@@ -19,6 +19,10 @@ server {
 {% endif %}
   index index.php index.html;
 
+{% if item.value.redirect is defined %}
+  return 301 {{ item.value.redirect }};
+{% endif %}
+
   access_log /var/log/nginx/{{ item.key }}-access.log;
   error_log /var/log/nginx/{{ item.key }}-error.log error;
 

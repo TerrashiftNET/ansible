@@ -12,3 +12,5 @@ vhosts:
       port: 8100
       ip: "{{ hostvars['host01.terrashift.net']['ansible_eth0'].ipv4.address }}"
   stats.terrashift.net: {}
+  terrashift.net:
+    redirect: "https://apply.terrashift.net"
