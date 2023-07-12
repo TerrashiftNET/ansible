@@ -4,7 +4,7 @@
   apt:
     pkg:
       - openjdk-17-jre
-    state: installed
+    state: present
 
 - name: add stat update cron
   cron:
