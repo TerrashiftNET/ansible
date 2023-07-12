@@ -7,3 +7,19 @@
     minute: "0"
     hour: "12"
     state: present
+
+- name: add daily creative restore
+  cron:
+    name: "creative restore"
+    job: "/home/automation/scripts/restore-creative.sh"
+    minute: "0"
+    hour: "1"
+    state: present
+
+- name: add daily name updater
+  cron:
+    name: "MC name update"
+    job: "/home/automation/scripts/whitelist-name-updater.sh"
+    minute: "0"
+    hour: "1"
+    state: present

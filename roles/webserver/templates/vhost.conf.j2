@@ -50,7 +50,7 @@ server {
 {% endif %}
 
   location / {
-      try_files $uri $uri/ /index.php?$query_string /index.html?$query_string;
+      try_files $uri $uri/ /index.php?$query_string;
   }
 
 {% if item.value.php_fpm is defined %}
