@@ -7,4 +7,3 @@
   roles:
     - {role: webserver, tags: [web]}
     - {role: wings, tags: [pterodactyl]}
-    - {role: limesurvey, tags: [limesurvey]}

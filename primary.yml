@@ -11,3 +11,4 @@
     - {role: pterodactyl_panel, tags: [primary, pterodactyl]}
     - {role: wings, tags: [pterodactyl]}
     - {role: monitoring, tags: [primary, monitoring]}
+    - {role: automation, tags: [primary, automation]}
