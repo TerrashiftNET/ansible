@@ -8,3 +8,4 @@
     - {role: webserver, tags: [web]}
     - {role: wings, tags: [pterodactyl]}
     - {role: recruiting, tags: [recruiting]}
+    - {role: ts-bot, tags: [ts-bot]}

@@ -1,0 +1,13 @@
+---
+
+- name: create terrashift-bot service
+  template:
+    src: "files/ts-bot/terrashift-bot.service"
+    dest: "/etc/systemd/system/terrashift-bot.service"
+
+- name: start terrashift-bot service
+  systemd:
+    state: started
+    enabled: true
+    name: terrashift-bot
+    daemon_reload: true

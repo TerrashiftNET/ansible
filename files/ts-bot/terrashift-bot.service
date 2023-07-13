@@ -1,0 +1,15 @@
+[Unit]
+Description=terrashift bot service
+
+[Service]
+WorkingDirectory=/srv/Terrashift-Bot
+ExecStart=/usr/bin/npm start
+Restart=always
+RestartSec=500ms
+
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=terrashift-bot
+
+[Install]
+WantedBy=multi-user.target
