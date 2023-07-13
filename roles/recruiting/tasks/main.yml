@@ -18,3 +18,15 @@
     enabled: true
     name: node-apply
     daemon_reload: true
+
+- name: create recruitbot service
+  template:
+    src: "files/recruiting/recruitbot.service"
+    dest: "/etc/systemd/system/recruitbot.service"
+
+- name: start recruitbot service
+  systemd:
+    state: started
+    enabled: true
+    name: recruitbot
+    daemon_reload: true

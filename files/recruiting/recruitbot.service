@@ -1,0 +1,15 @@
+[Unit]
+Description=apply.terrashift.net recruitbot service
+
+[Service]
+WorkingDirectory=/srv/recruitbot
+ExecStart=/srv/recruitbot/bin/python /srv/recruitbot/recruitbot.py
+Restart=always
+RestartSec=500ms
+
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=recruitbot
+
+[Install]
+WantedBy=multi-user.target
