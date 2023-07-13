@@ -3,7 +3,7 @@
 - name: add daily activity cron
   cron:
     name: "activity report"
-    job: "/home/automation/scripts/minecraft-discord-player-report/activity-check.py"
+    job: "cd /home/automation/scripts/minecraft-discord-player-report/ && ./activity-check.py"
     minute: "0"
     hour: "12"
     state: present
