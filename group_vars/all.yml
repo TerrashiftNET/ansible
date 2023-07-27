@@ -18,3 +18,20 @@ admins:
   tyler:
     username: "tyler"
     key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCYkOlx6Of+cKHdb396lb2qnWU8v2+M++pPOGyjsWnWxb6ZhKMKo633y/n7g0Hh6Vz9lAlOJ86tlX5NKl8ovNyk6riP323f0KuXTFUxwROfeHSgTjjFDXIExBhltHigGv/RyxvyqSxUex68e4hfaxRuU/mvUdc4ZMUI8AH/P4umIIXJAoceX9kGHCkvy3NilJJwOanQr0DAjDkueAIntsERfPEwnYL4IAlaCO77dP+gnw1PMFDBUFoBEJBRp5gFbs6LKGRAsTMfnSHOX8E3dAdZwmI8enPRqgp+8fV8WW7gFmqfOn0DGRSpiSYShGOQkB400/MgrNRprJKqRiLj8SVf rsa-key-20230415"
+vhosts:
+  admin.terrashift.net:
+    php_fpm: "php8.1"
+    doc_root: "public/"
+  grafana.terrashift.net:
+    proxy:
+      port: 3000
+  map.terrashift.net:
+    proxy:
+      port: 8100
+      ip: "{{ hostvars['host.terrashift.net']['ansible_eno1'].ipv4.address }}"
+  stats.terrashift.net: {}
+  terrashift.net:
+    redirect: "https://apply.terrashift.net"
+  apply.terrashift.net:
+    proxy:
+      port: 4000

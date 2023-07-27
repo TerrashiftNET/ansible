@@ -1,12 +1,5 @@
 ---
 
-- name: install nodejs
-  apt:
-    pkg:
-      - nodejs
-      - npm
-    state: present
-
 - name: create node service
   template:
     src: "files/recruiting/node-apply.service"

@@ -27,12 +27,3 @@
     -m {{ le_email }}
   args:
     creates: /etc/letsencrypt/live/terrashift.net
-
-- name: sync certs to all nodes
-  synchronize:
-    src: /etc/letsencrypt/
-    dest: /etc/letsencrypt/
-    mode: pull
-    recursive: true
-  delegate_to: "{{ item }}"
-  with_items: "{{ groups.node_role_secondary }}"

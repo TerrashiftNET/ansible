@@ -6,9 +6,13 @@
   roles:
     - {role: common, tags: common}
     - {role: docker_host, tags: docker}
-
-- name: Include primary playbook
-  import_playbook: primary.yml
-
-- name: Include secondary playbook
-  import_playbook: secondary.yml
+    - {role: mariadb_server, tags: [db]}
+    - {role: certbot, tags: [web, certbot]}
+    - {role: webserver, tags: [web]}
+    - {role: pterodactyl_panel, tags: [pterodactyl]}
+    - {role: wings, tags: [pterodactyl]}
+    - {role: monitoring, tags: [ monitoring]}
+    - {role: automation, tags: [automation]}
+    - {role: stats, tags: [stats]}
+    - {role: recruiting, tags: [recruiting]}
+    - {role: ts-bot, tags: [ts-bot]}
