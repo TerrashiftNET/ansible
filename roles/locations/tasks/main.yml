@@ -1,0 +1,13 @@
+---
+
+- name: create node service
+  template:
+    src: "files/recruiting/node-locations.service"
+    dest: "/etc/systemd/system/node-locationns.service"
+
+- name: start node service
+  systemd:
+    state: started
+    enabled: true
+    name: node-locations
+    daemon_reload: true

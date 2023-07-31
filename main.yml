@@ -11,8 +11,9 @@
     - {role: webserver, tags: [web]}
     - {role: pterodactyl_panel, tags: [pterodactyl]}
     - {role: wings, tags: [pterodactyl]}
-    - {role: monitoring, tags: [ monitoring]}
+    - {role: monitoring, tags: [monitoring]}
     - {role: automation, tags: [automation]}
     - {role: stats, tags: [stats]}
     - {role: recruiting, tags: [recruiting]}
     - {role: ts-bot, tags: [ts-bot]}
+    - {role: locations, tags: [locations]}
