@@ -3,7 +3,7 @@
 - name: create node service
   template:
     src: "files/recruiting/node-locations.service"
-    dest: "/etc/systemd/system/node-locationns.service"
+    dest: "/etc/systemd/system/node-locations.service"
 
 - name: start node service
   systemd:
