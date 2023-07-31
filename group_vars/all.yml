@@ -35,3 +35,6 @@ vhosts:
   apply.terrashift.net:
     proxy:
       port: 4000
+  locations.terrashift.net:
+    proxy:
+      port: 4001
