@@ -23,3 +23,10 @@
     minute: "0"
     hour: "1"
     state: present
+
+- name: add whitelist sync
+  cron:
+    name: "whitelist sync"
+    job: "/home/automation/scripts/sync-whitelist.sh"
+    minute: "*/15"
+    state: present
