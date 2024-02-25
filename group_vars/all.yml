@@ -28,7 +28,7 @@ vhosts:
   map.terrashift.net:
     proxy:
       port: 8100
-      ip: "{{ hostvars['host.terrashift.net']['ansible_eno1'].ipv4.address }}"
+      ip: "{{ hostvars['host.terrashift.net']['ansible_enp6s0'].ipv4.address }}"
   stats.terrashift.net: {}
   terrashift.net:
     redirect: "https://apply.terrashift.net"
