@@ -100,7 +100,6 @@
     force: true
   with_items:
     - "{{ admins.robo.username }}"
-    - "{{ admins.tyler.username }}"
 
 - name: add vimrc configurations
   copy:
