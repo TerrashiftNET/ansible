@@ -22,7 +22,7 @@
     job: "/home/automation/scripts/whitelist-name-updater.sh"
     minute: "0"
     hour: "1"
-    state: present
+    state: absent
 
 - name: add whitelist sync
   cron:
