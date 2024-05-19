@@ -21,11 +21,12 @@ jobs:
 
       - name: Detect tag usage
         run: |
-          echo "TAGS=all" >> $GITHUB_ENV
+          echo "TAGS=all" >> "$GITHUB_ENV"
           commit_msg=$(git log -1 --no-merges --pretty=%B)
           if [[ $commit_msg =~ ^\[(.*)\].* ]]; then
-            echo "TAGS=${BASH_REMATCH[1]}" >> $GITHUB_ENV
+            echo "TAGS=${BASH_REMATCH[1]}" >> "$GITHUB_ENV"
           fi
+          echo "$TAGS"
 
       - name: Run ansible
         uses: dawidd6/action-ansible-playbook@v2
@@ -34,4 +35,4 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           vault_password: ${{ secrets.ANSIBLE_VAULT_PASS }}
           options: |
-            --tags $TAGS
+            --tags "$TAGS"
