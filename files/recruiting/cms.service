@@ -2,7 +2,7 @@
 Description=cms.terrashift.net node service
 
 [Service]
-WorkingDirectory=/srv/pages-cms
+WorkingDirectory=/srv/pages-cms/
 ExecStart=npm run dev
 Restart=always
 RestartSec=500ms
