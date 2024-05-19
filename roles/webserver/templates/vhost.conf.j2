@@ -28,6 +28,11 @@ server {
 {% if item.value.redirect is defined %}
   return 301 {{ item.value.redirect }};
 {% endif %}
+{% if item.value.www_redirect is defined %}
+  if ($host !~* ^www\.) {
+    return 301 https://www.$host$request_uri;
+  }
+{% endif %}
 
   access_log /var/log/nginx/{{ item.key }}-access.log;
   error_log /var/log/nginx/{{ item.key }}-error.log error;

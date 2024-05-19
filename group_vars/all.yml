@@ -31,6 +31,7 @@ vhosts:
       ip: "{{ hostvars['host.terrashift.net']['ansible_enp6s0'].ipv4.address }}"
   stats.terrashift.net: {}
   terrashift.net:
+    www_redirect: true
     aliases:
       - "www.terrashift.net"
   cms.terrashift.net:
