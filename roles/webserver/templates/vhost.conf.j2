@@ -1,6 +1,9 @@
 server {
   listen {{ http_port }};
   server_name {{ item.key }};
+{% if item.value.aliases is defined %}
+  server_name {{ item.value.aliases|join(" ")}};
+{% endif %}
 
   return 301 https://$host$request_uri;
 }
