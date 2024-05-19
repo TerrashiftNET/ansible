@@ -1,0 +1,20 @@
+[Unit]
+Description=cms.terrashift.net node service
+
+[Service]
+WorkingDirectory=/srv/pages-cms
+ExecStart=npm run dev
+Restart=always
+RestartSec=500ms
+
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=nodejs
+
+User=www-data
+Group=www-data
+
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
