@@ -19,9 +19,13 @@ jobs:
         with:
           ssh-key: ${{ secrets.REPO_KEY }}
 
-      - name: Install hcloud library
-        id: hcloud-install
-        run: pipx inject ansible-core hcloud
+      - name: Detect tag usage
+        run: |
+          echo "TAGS=all" >> $GITHUB_ENV
+          commit_msg=$(git log -1 --no-merges --pretty=%B)
+          if [[ $commit_msg =~ ^\[(.*)\].* ]]; then
+            echo "TAGS=${BASH_REMATCH[1]}" >> $GITHUB_ENV
+          fi
 
       - name: Run ansible
         uses: dawidd6/action-ansible-playbook@v2
@@ -29,3 +33,5 @@ jobs:
           playbook: main.yml
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           vault_password: ${{ secrets.ANSIBLE_VAULT_PASS }}
+          options: |
+            --tags $TAGS
