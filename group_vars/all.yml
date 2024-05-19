@@ -38,4 +38,5 @@ vhosts:
       port: 4001
   cms.terrashift.net:
     proxy:
-      port: 5176
+      port: 8788
+
