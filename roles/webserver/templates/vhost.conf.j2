@@ -8,6 +8,9 @@ server {
 server {
   listen {{ https_port }} ssl http2;
   server_name {{ item.key }};
+{% if item.value.aliases is defined %}
+  server_name {{ item.value.aliases|join(" ")}};
+{% endif %}
 
   ssl_certificate /etc/letsencrypt/live/terrashift.net/fullchain.pem;
   ssl_certificate_key /etc/letsencrypt/live/terrashift.net/privkey.pem;
