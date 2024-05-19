@@ -23,3 +23,15 @@
     enabled: true
     name: recruitbot
     daemon_reload: true
+
+- name: create cms service
+  template:
+    src: "files/recruiting/cms.service"
+    dest: "/etc/systemd/system/cms.service"
+
+- name: start cms service
+  systemd:
+    state: started
+    enabled: true
+    name: cms
+    daemon_reload: true
