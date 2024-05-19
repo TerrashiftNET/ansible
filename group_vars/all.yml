@@ -36,3 +36,6 @@ vhosts:
   locations.terrashift.net:
     proxy:
       port: 4001
+  cms.terrashift.net:
+    proxy:
+      port: 5176
