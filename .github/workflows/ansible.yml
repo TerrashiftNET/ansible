@@ -35,4 +35,4 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           vault_password: ${{ secrets.ANSIBLE_VAULT_PASS }}
           options: |
-            --tags "$TAGS"
+            --tags ${{ env.TAGS }}
