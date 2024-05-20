@@ -14,13 +14,13 @@ clients:
   - url: http://localhost:3100/loki/api/v1/push
 
 scrape_configs:
-  - job_name: system
+  - job_name: pterodactyl
     static_configs:
       - targets:
           - localhost
         labels:
-          job: varlogs
-          __path__: /var/log/messages
+          job: pterodactyl
+          __path__: /var/log/pterodactyl/wings.log
 
   - job_name: nginx-access
     static_configs:
@@ -28,7 +28,7 @@ scrape_configs:
           - localhost
         labels:
           job: nginx-access
-          __path__: /var/log/*-access.log
+          __path__: /var/log/nginx/*-access.log
 
   - job_name: nginx-error
     static_configs:
@@ -36,4 +36,4 @@ scrape_configs:
           - localhost
         labels:
           job: nginx-access
-          __path__: /var/log/*-error.log
+          __path__: /var/log/nginx/*-error.log
