@@ -9,3 +9,8 @@
   service:
     name: grafana-server
     state: restarted
+
+- name: Restart promtail
+  service:
+    name: promtail
+    state: restarted

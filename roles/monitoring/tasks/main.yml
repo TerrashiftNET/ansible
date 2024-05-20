@@ -62,3 +62,13 @@
     pkg:
       - loki
       - promtail
+
+- name: Deploy promtail configuration
+  copy:
+    dest: /etc/promtail/config.yml
+    src: files/common/sshd_config
+    owner: root
+    group: root
+    mode: 0644
+    force: true
+  notify: Restart promtail
