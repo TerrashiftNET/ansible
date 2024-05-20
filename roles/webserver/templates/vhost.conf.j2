@@ -58,7 +58,7 @@ server {
 
   {% if item.value.websocket is defined %}
     proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection $connection_upgrade;
+    proxy_set_header Connection "Upgrade";
   {% endif %}
   {% if item.value.proxy.ip is defined %}
     proxy_pass http://{{ item.value.proxy.ip }}:{{ item.value.proxy.port }};
