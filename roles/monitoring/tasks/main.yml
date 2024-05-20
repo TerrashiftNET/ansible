@@ -66,7 +66,7 @@
 - name: Deploy promtail configuration
   copy:
     dest: /etc/promtail/config.yml
-    src: files/common/sshd_config
+    src: files/promtail/config.yml
     owner: root
     group: root
     mode: 0644
