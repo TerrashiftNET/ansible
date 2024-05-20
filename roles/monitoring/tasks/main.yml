@@ -56,3 +56,9 @@
     name: grafana-server
     enabled: true
     state: started
+
+- name: Install loki/promtail
+  apt:
+    pkg:
+      - loki
+      - promtail
