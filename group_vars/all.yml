@@ -36,6 +36,7 @@ vhosts:
     aliases:
       - "www.terrashift.net"
     doc_root: "web/dist/"
+    downloads: true
   cms.terrashift.net:
     proxy:
       port: 8788

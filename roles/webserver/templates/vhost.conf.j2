@@ -90,4 +90,10 @@ server {
       include /etc/nginx/fastcgi_params;
   }
 {% endif %}
+{% if item.value.downloads is defined %}
+  location ~ ^/downloads/ {
+    root /home/www/{{ item.key }}/downloads/;
+    fancyindex on;
+  }
+{% endif %}
 }
