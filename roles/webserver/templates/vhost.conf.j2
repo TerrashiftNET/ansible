@@ -92,7 +92,7 @@ server {
 {% endif %}
 {% if item.value.downloads is defined %}
   location ~ ^/downloads/ {
-    root /home/www/{{ item.key }}/downloads/;
+    root /home/www/{{ item.key }}/;
     fancyindex on;
   }
 {% endif %}
