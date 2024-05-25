@@ -35,6 +35,7 @@ vhosts:
     www_redirect: true
     aliases:
       - "www.terrashift.net"
+    doc_root: "web/dist/"
   cms.terrashift.net:
     proxy:
       port: 8788
