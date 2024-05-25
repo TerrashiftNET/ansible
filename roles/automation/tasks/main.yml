@@ -30,3 +30,11 @@
     job: "/home/automation/scripts/sync-whitelist.sh"
     minute: "*/15"
     state: present
+
+- name: rebuild main site
+  cron:
+    name: "rebuild main site"
+    job: "cd /home/www/terrashift.net/web && /usr/local/bin/npm run build"
+    minute: "0"
+    hour: "0"
+    state: present
