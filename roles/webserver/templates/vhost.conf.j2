@@ -34,7 +34,7 @@ server {
   }
 {% endif %}
 
-  access_log /var/log/nginx/{{ item.key }}-access.log;
+  access_log /var/log/nginx/{{ item.key }}-access-json.log access_json;
   error_log /var/log/nginx/{{ item.key }}-error.log error;
 
   client_max_body_size 100m;
