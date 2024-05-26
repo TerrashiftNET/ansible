@@ -69,7 +69,11 @@ server {
 {% endif %}
 
   location / {
-      try_files $uri $uri/ /index.php?$query_string =404;
+{% if item.value.php_fpm is defined %}
+      try_files $uri $uri/ /index.php?$query_string;
+{% else %}
+      try_files $uri $uri/ =404;
+{% endif %}
   }
 
 {% if item.value.php_fpm is defined %}
