@@ -10,6 +10,15 @@
     name: nginx
     state: started
 
+- name: create custom nginx logging config
+  copy:
+    src: files/nginx/000-logging.conf
+    dest: /etc/nginx/conf.d/000-logging.conf
+    state: present
+    owner: root
+    group: root
+    mode: 0644
+
 - name: remove default nginx vhost
   file:
     path: "/etc/nginx/sites-enabled/default"
