@@ -28,7 +28,7 @@ scrape_configs:
           - localhost
         labels:
           job: nginx-access
-          __path__: /var/log/nginx/*-access.log
+          __path__: /var/log/nginx/*-access-json.log
     pipeline_stages:
       - json:
           expressions:
@@ -41,6 +41,8 @@ scrape_configs:
             bytes:
             referrer:
             agent:
+      - labels:
+          host:
 
   - job_name: nginx-error
     static_configs:
