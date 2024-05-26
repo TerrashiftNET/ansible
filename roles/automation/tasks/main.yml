@@ -34,7 +34,6 @@
 - name: rebuild main site
   cron:
     name: "rebuild main site"
-    job: "cd /home/www/terrashift.net/web && /usr/local/bin/npm run build"
-    minute: "0"
-    hour: "0"
+    job: "/home/automation/scripts/rebuild-www.sh"
+    minute: "*/10"
     state: present
