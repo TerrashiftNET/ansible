@@ -6,6 +6,7 @@
     job: "cd /home/automation/scripts/minecraft-discord-player-report/ && ./activity-check.py"
     minute: "0"
     hour: "12"
+    weekday: "6"
     state: present
 
 - name: add daily creative restore
