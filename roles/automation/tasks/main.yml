@@ -13,8 +13,8 @@
   cron:
     name: "creative restore"
     job: "/home/automation/scripts/restore-creative.sh"
-    minute: "0"
-    hour: "1"
+    minute: "55"
+    hour: "0"
     state: present
 
 - name: add daily name updater
