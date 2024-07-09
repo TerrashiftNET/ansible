@@ -2,8 +2,8 @@
 Description=apply.terrashift.net recruitbot service
 
 [Service]
-WorkingDirectory=/srv/recruitbot
-ExecStart=/srv/recruitbot/bin/python /srv/recruitbot/recruitbot.py
+WorkingDirectory=/home/automation/toolkit/
+ExecStart=/usr/bin/python3 /home/automation/toolkit/recruitbot.py
 Restart=always
 RestartSec=500ms
 
