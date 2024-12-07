@@ -98,6 +98,8 @@ server {
   location ~ ^/downloads/ {
     root /home/www/{{ item.key }}/;
     fancyindex on;
+    fancyindex_exact_size off;
+    fancyindex_hide_parentdir on;
   }
 {% endif %}
 }
