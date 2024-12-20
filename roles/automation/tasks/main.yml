@@ -38,3 +38,24 @@
     job: "/home/automation/scripts/rebuild-www.sh"
     minute: "*/10"
     state: present
+
+- name: create ledger database
+  mysql_db:
+    name: ledger
+    state: present
+    check_implicit_admin: true
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    login_user: root
+
+- name: create ledger mysql user
+  mysql_user:
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    login_user: root
+    check_implicit_admin: true
+    name: ledger
+    host: "{{ item }}"
+    password: "{{ ledger_mysql_pass }}"
+    priv: "ledger.*:ALL"
+  with_items:
+    - 172.18.0.0/255.255.0.0
