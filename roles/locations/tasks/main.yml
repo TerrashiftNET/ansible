@@ -7,7 +7,7 @@
 
 - name: start node service
   systemd:
-    state: started
+    state: stopped
     enabled: true
     name: node-locations
     daemon_reload: true

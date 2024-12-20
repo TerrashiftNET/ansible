@@ -44,5 +44,4 @@ vhosts:
     proxy:
       port: 4000
   locations.terrashift.net:
-    proxy:
-      port: 4001
+    redirect: "https://map.terrashift.net"
