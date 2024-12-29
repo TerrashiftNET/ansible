@@ -12,3 +12,12 @@
     job: "java -jar /home/www/stats.terrashift.net/MinecraftStatsCLI.jar /home/www/stats.terrashift.net/config.json"
     minute: "*/5"
     state: present
+
+- name: helper script
+  cron: 
+    name: "bot filtering for stats"
+    job: "node /home/www/stats.terrashift.net/helper/index.js"
+    minute: "0"
+    hour: "0"
+    state: present
+    
