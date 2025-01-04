@@ -8,3 +8,18 @@
 - name: Run wings installation if needed
   include_tasks: install.yml
   when: not wings.stat.exists
+
+- name: Create systemd override directory
+  file:
+    path: "/etc/system.conf.d/"
+    state: directory
+    mode: 0755
+
+- name: Create systemd manager override
+  copy:
+    dest: /etc/system.conf.d/override.conf
+    src: files/systemd/override.conf
+    mode: 0644
+    owner: "root"
+    group: "root"
+    force: true
