@@ -11,13 +11,13 @@
 
 - name: Create systemd override directory
   file:
-    path: "/etc/system.conf.d/"
+    path: "/etc/systemd/system.conf.d/"
     state: directory
     mode: 0755
 
 - name: Create systemd manager override
   copy:
-    dest: /etc/system.conf.d/override.conf
+    dest: /etc/systemd/system.conf.d/override.conf
     src: files/systemd/override.conf
     mode: 0644
     owner: "root"
