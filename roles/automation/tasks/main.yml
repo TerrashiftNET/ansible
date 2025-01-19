@@ -59,3 +59,19 @@
     priv: "ledger.*:ALL"
   with_items:
     - 172.18.0.0/255.255.0.0
+
+- name: add transparent huge page script
+  copy:
+    dest: /home/automation/scripts/thp_enable.sh
+    src: files/common/thp_enable.sh
+    mode: 0755
+    owner: root
+    group: root
+    force: true
+
+- name: enable thp on reboots
+  cron:
+    name: "enable thp"
+    job: "/home/automation/scripts/thp_enable.sh"
+    special_time: "reboot"
+    state: present
