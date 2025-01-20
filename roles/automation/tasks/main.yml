@@ -75,3 +75,11 @@
     job: "/home/automation/scripts/thp_enable.sh"
     special_time: "reboot"
     state: present
+
+- name: add daily ledger cleanup
+  cron:
+    name: "Ledger retention"
+    job: "mysql ledger -e 'delete from actions where `time` < NOW() - INTERVAL 7 DAY;'"
+    minute: "0"
+    hour: "0"
+    state: present
