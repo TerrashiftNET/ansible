@@ -83,3 +83,9 @@
     minute: "0"
     hour: "0"
     state: present
+
+- name: add chat monitor cron
+  cron:
+    name: "chat monitor"
+    job: "/home/automation/scripts/chat-monitor.sh"
+    state: present
